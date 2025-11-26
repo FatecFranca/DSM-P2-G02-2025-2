@@ -8,7 +8,7 @@ USE Checkpoint;
 CREATE TABLE users (
     pk_id INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100) DEFAULT NULL,
-    Nick VARCHAR(50) NOT NULL UNIQUE, -- Aumentado para 50 chars
+    Nick VARCHAR(50) NOT NULL UNIQUE, 
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     Idade INT DEFAULT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE events (
     pk_idEvento INT AUTO_INCREMENT PRIMARY KEY,
     fk_idUsuario INT NOT NULL,
     nomeEvento VARCHAR(100) NOT NULL,
-    dataEvento DATETIME, -- Mudado para DATETIME para aceitar hora se necessário
+    dataEvento DATETIME, 
     localEvento VARCHAR(150),
     QuantParticipantes INT DEFAULT 1,
     
