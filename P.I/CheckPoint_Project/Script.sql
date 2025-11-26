@@ -16,7 +16,7 @@ CREATE TABLE users (
     Gostos TEXT DEFAULT NULL,
     Personalidade ENUM('introvertido', 'extrovertido', 'depende da companhia') DEFAULT NULL,
     
-    -- "Valor" representa o Teto de Gastos/Salário do usuário
+-- "Valor" representa o Teto de Gastos/Salário do usuário
     Valor DECIMAL(10, 2) DEFAULT 0 CHECK (Valor >= 0), 
     
     Disponibilidade TINYINT DEFAULT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE gastos (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- [OTIMIZAÇÃO] Índices para deixar a busca do gráfico e saldo rápida
+-- Índices para deixar a busca do gráfico e saldo rápida
 CREATE INDEX idx_usuario_data ON gastos(fk_idUsuario, dataGasto);
 CREATE INDEX idx_categoria ON gastos(categoria);
 
@@ -97,10 +97,9 @@ CREATE TABLE alertas (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- =======================================================
--- 6. VIEW para facilitar o Dashboard (DICA DE OURO)
+-- 6. VIEW para facilitar o Dashboard 
 -- =======================================================
 -- Essa View calcula automaticamente o total gasto no mês atual para cada usuário.
--- No seu Node.js, você pode fazer: "SELECT * FROM view_resumo_mensal WHERE idUsuario = X"
 CREATE OR REPLACE VIEW view_resumo_mensal AS
 SELECT 
     u.pk_id AS idUsuario,
