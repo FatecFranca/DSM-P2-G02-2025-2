@@ -101,13 +101,14 @@ const UserModel = {
                 mensagem: "Usuário ou email incorreto!",
             };
         } 
+
         const codigo = Math.floor(100000 + Math.random() * 900000); 
 
         await queryPromise(sql2, [codigo, u_nick]);
         return {
             sucesso: true,
             mensagem: "Código gerado.",
-            codigo
+            codigo,
         };
     }catch (erro) {
         console.error("Erro no banco:", erro);
@@ -119,8 +120,65 @@ const UserModel = {
 
 
     },
-    verificar: async (codigo) =>{c
+    login_c: async (u_nick) => {
+        const sql = "SELECT * FROM users WHERE Nick = ?";
+
+        try {
+        const result = await queryPromise(sql, [u_nick]);
         
+        if (result.length === 0) {
+            return { 
+                sucesso: false,
+                mensagem: "Usuário incorreto!",
+            };
+        } 
+        const usuario = result[0];
+        return {
+                sucesso: true,
+                mensagem: "Login efetuado com sucesso!",
+                usuario: usuario
+            };
+
+    } catch (erro) {
+        console.error("Erro no banco:", erro);
+        return {
+            sucesso: false,
+            mensagem: "Erro interno ao consultar o banco de dados."
+        };
+    }
+        
+    },
+
+    login_v: async (u_codigo) => {
+        const sql = "SELECT * FROM users WHERE codigo = ?";
+
+        try {
+        const result = await queryPromise(sql, [u_codigo]);
+        
+        if (result.length === 0) {
+            return { 
+                sucesso: false,
+                mensagem: "Usuário incorreto!",
+            };
+        } 
+        const usuario = result[0];
+        return {
+                sucesso: true,
+                mensagem: "Login efetuado com sucesso!",
+                usuario: usuario
+            };
+
+    } catch (erro) {
+        console.error("Erro no banco:", erro);
+        return {
+            sucesso: false,
+            mensagem: "Erro interno ao consultar o banco de dados."
+        };
+    }
+        
+    },
+    verificar: async (codigo) =>{
+
         const sql = "SELECT * FROM users WHERE codigo = ?"
 
         try {
