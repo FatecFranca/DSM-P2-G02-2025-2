@@ -18,9 +18,9 @@ const UserController = {
 
         try {
             const resultado = await UserModel.criarUsuario(dadosUsuario);
-
+            const resultados = await UserModel.login_c( dadosUsuario.Nick);
             if (resultado.sucesso) {
-                req.session.usuarioLogado = resultado.usuario;
+                req.session.usuarioLogado = resultados.usuario;
                 req.session.save(() => {
                 return res.redirect("/menu_inicial.html");
                 });
@@ -83,13 +83,17 @@ const UserController = {
             const dadosUsuario = req.body;
 
             try {
+                const resultados = await UserModel.login_v( dadosUsuario.codigo);
+
                 const resultado = await UserModel.verificar(dadosUsuario.codigo);
 
                 if (!resultado.sucesso){
                     return res.status(400).json(resultado);
                 }
-               return res.redirect("/menu_inicial.html");
-
+                req.session.usuarioLogado = resultados.usuario;
+                req.session.save(() => {
+                return res.redirect("/menu_inicial.html");
+            });
             }catch (erro) {
             console.error(erro);
             res.status(500).json({ sucesso: false, mensagem: "Erro interno do servidor." });
