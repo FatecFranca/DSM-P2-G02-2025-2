@@ -7,7 +7,7 @@ Grupo 02 - Projeto Interdisciplinar DSM 2o Ciclo - 2025-2 (CHECKPOINT)
 ### *1. Clonar o repositório*
 
 
-git clone https://github.com/seu-usuario/seu-repositório.git
+git clone https://github.com/FatecFranca/DSM-P2-G02-2025-2.git
 
 
 ### *2. Entrar na pasta backend*
